@@ -10,6 +10,7 @@ public struct ImagePreviewView: View {
 
         case showFiltersOptions
         case switchFilterOption(ImageFilter)
+        case changedIntensity(CGFloat)
 
         public func hash(into hasher: inout Hasher) {
             hasher.combine(self)
@@ -34,6 +35,7 @@ public struct ImagePreviewView: View {
             filteredImage: viewModel.previewImage.filteredImage,
             currentFilter: $viewModel.currentFilter,
             showFiltersOptions: viewModel.showFiltersOptions,
+            filterIntensity: $viewModel.filterIntensity,
             onEvent: { currentEvent = $0 }
         )
         .task(id: currentEvent) {

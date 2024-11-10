@@ -6,12 +6,12 @@ import CoreImage.CIFilterBuiltins
 public extension UIImage {
 
     // MARK: - Builtin filters
-    var toSepia: UIImage {
+    func toSepia(intensity: CGFloat) -> UIImage {
         guard let ciImage = CIImage(image: self) else { return self }
 
         let filter = CIFilter.sepiaTone()
         filter.inputImage = ciImage
-        filter.intensity = 1.0
+        filter.intensity = Float(intensity)
         return applyFilter(filter, inputImage: self)
     }
 

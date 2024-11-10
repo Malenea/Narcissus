@@ -10,6 +10,7 @@ public extension ImagePreviewView {
         let filteredImage: UIImage?
         let currentFilter: Binding<ImageFilter>
         let showFiltersOptions: Bool
+        let filterIntensity: Binding<CGFloat>
         let onEvent: (Event) -> Void
 
         var sharingImage: Image {
@@ -22,12 +23,14 @@ public extension ImagePreviewView {
             filteredImage: UIImage?,
             currentFilter: Binding<ImageFilter>,
             showFiltersOptions: Bool,
+            filterIntensity: Binding<CGFloat>,
             onEvent: @escaping (Event) -> Void
         ) {
             self.image = image
             self.filteredImage = filteredImage
             self.currentFilter = currentFilter
             self.showFiltersOptions = showFiltersOptions
+            self.filterIntensity = filterIntensity
             self.onEvent = onEvent
         }
 
@@ -60,6 +63,10 @@ public extension ImagePreviewView {
                     VStack(spacing: .zero) {
                         Spacer()
                         if showFiltersOptions {
+                            if currentFilter.wrappedValue == .sepia {
+                                slider
+                                    .transition(.slide)
+                            }
                             ModeSelector(currentMode: currentFilter.wrappedValue.toModeSelectorItem, modes: ImageFilter.allModeSelectorCases, isDisabled: false) {
                                 onEvent(.switchFilterOption(ImageFilter(rawValue: $0.id)))
                             }
@@ -87,6 +94,30 @@ public extension ImagePreviewView {
                     }
                 }
             }
+        }
+
+        private var slider: some View {
+            VStack {
+                Text("Intensity")
+                    .font(.caption)
+                Slider(value: filterIntensity, in: 0...1)
+                    .accentColor(.white.opacity(0.6))
+                    .onChange(of: filterIntensity.wrappedValue) {
+                        onEvent(.changedIntensity(filterIntensity.wrappedValue))
+                    }
+            }
+            .padding(8)
+            .background {
+                Color(.systemBackground)
+                    .opacity(0.6)
+                    .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 18)
+                            .stroke(Color.primary.opacity(0.15), lineWidth: 1.2)
+                    )
+            }
+            .padding(.horizontal, 48)
+            .padding(.bottom, 8)
         }
 
     }

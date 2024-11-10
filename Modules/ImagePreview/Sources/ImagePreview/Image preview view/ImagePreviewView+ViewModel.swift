@@ -10,6 +10,7 @@ public extension ImagePreviewView {
         @ObservedObject var previewImage: PreviewImage
         @Published var currentFilter: ImageFilter = .none
         @Published var showFiltersOptions: Bool = false
+        @Published var filterIntensity: CGFloat = 1.0
         private let onNavigationEvents: (NavigationEvent) -> Void
 
         init(
@@ -30,14 +31,22 @@ public extension ImagePreviewView {
                     showFiltersOptions.toggle()
                 }
             case .switchFilterOption(let filter):
-                currentFilter = filter
+                withAnimation {
+                    currentFilter = filter
+                    switch currentFilter {
+                    case .none:
+                        previewImage.filteredImage = nil
+                    case .sepia:
+                        previewImage.filteredImage = previewImage.uiImage.toSepia(intensity: filterIntensity)
+                    case .sketch:
+                        previewImage.filteredImage = previewImage.uiImage.toSketch
+                    }
+                }
+            case .changedIntensity(let intensity):
                 switch currentFilter {
-                case .none:
-                    previewImage.filteredImage = nil
                 case .sepia:
-                    previewImage.filteredImage = previewImage.uiImage.toSepia
-                case .sketch:
-                    previewImage.filteredImage = previewImage.uiImage.toSketch
+                    previewImage.filteredImage = previewImage.uiImage.toSepia(intensity: intensity)
+                default: break
                 }
 
             default: break
