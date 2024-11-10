@@ -6,10 +6,6 @@ public struct VideoPreviewView: View {
         case idle
         case didAppear
 
-//        case showFiltersOptions
-//        case switchFilterOption(ImageFilter)
-//        case changedIntensity(CGFloat)
-
         public func hash(into hasher: inout Hasher) {
             hasher.combine(self)
         }
