@@ -15,6 +15,7 @@ public struct CameraFeedView: View {
         case openSettings
 
         case finishCapturingPhoto(UIImage)
+        case finishCapturingVideo(URL)
 
         public func hash(into hasher: inout Hasher) {
             hasher.combine(self)

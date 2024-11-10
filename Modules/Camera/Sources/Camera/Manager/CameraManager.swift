@@ -223,14 +223,15 @@ public class CameraManager: ObservableObject {
         }
     }
 
-    func startRecording(completion: @escaping (URL?) -> Void) {
+    func startRecording(completion: @escaping (URL?, Error?) -> Void) {
         guard !videoOutput.isRecording, let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("video.mp4") else { return }
         videoDelegate = VideoDelegate { [weak self] url, error in
             if let error {
                 self?.managerError = error
+                completion(nil, error)
             }
             self?.capturedVideoURL = url
-            completion(url)
+            completion(url, nil)
         }
         if !videoOutput.isRecording {
             if FileManager.default.fileExists(atPath: url.path) {

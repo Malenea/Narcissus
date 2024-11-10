@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FA4770552CE001AE00921891 /* ImagePreview in Frameworks */ = {isa = PBXBuildFile; productRef = FA4770542CE001AE00921891 /* ImagePreview */; };
+		FA47705C2CE13E5400921891 /* VideoPreview in Frameworks */ = {isa = PBXBuildFile; productRef = FA47705B2CE13E5400921891 /* VideoPreview */; };
 		FAA3820C2CDE39EA009669D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAA3820B2CDE39EA009669D8 /* Assets.xcassets */; };
 		FAA3820F2CDE39EA009669D8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAA3820E2CDE39EA009669D8 /* Preview Assets.xcassets */; };
 		FAA382192CDE39EA009669D8 /* NarcissusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA382182CDE39EA009669D8 /* NarcissusTests.swift */; };
@@ -39,6 +40,7 @@
 		FA4770532CE000F600921891 /* ImagePreview */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ImagePreview; sourceTree = "<group>"; };
 		FA4770562CE01ABC00921891 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
 		FA4770592CE03D5400921891 /* Filters */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Filters; sourceTree = "<group>"; };
+		FA47705A2CE13AB200921891 /* VideoPreview */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = VideoPreview; sourceTree = "<group>"; };
 		FAA382042CDE39E9009669D8 /* Narcissus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Narcissus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA3820B2CDE39EA009669D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAA3820E2CDE39EA009669D8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAA382382CDE5F8F009669D8 /* Camera in Frameworks */,
+				FA47705C2CE13E5400921891 /* VideoPreview in Frameworks */,
 				FA4770552CE001AE00921891 /* ImagePreview in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -154,6 +157,7 @@
 				FAA382332CDE3A85009669D8 /* Camera */,
 				FA4770592CE03D5400921891 /* Filters */,
 				FA4770532CE000F600921891 /* ImagePreview */,
+				FA47705A2CE13AB200921891 /* VideoPreview */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -184,6 +188,7 @@
 			packageProductDependencies = (
 				FAA382372CDE5F8F009669D8 /* Camera */,
 				FA4770542CE001AE00921891 /* ImagePreview */,
+				FA47705B2CE13E5400921891 /* VideoPreview */,
 			);
 			productName = Narcissus;
 			productReference = FAA382042CDE39E9009669D8 /* Narcissus.app */;
@@ -651,6 +656,10 @@
 		FA4770542CE001AE00921891 /* ImagePreview */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ImagePreview;
+		};
+		FA47705B2CE13E5400921891 /* VideoPreview */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VideoPreview;
 		};
 		FAA382372CDE5F8F009669D8 /* Camera */ = {
 			isa = XCSwiftPackageProductDependency;

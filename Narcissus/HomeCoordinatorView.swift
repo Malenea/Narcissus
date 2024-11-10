@@ -1,18 +1,22 @@
 import SwiftUI
 import Camera
 import ImagePreview
+import VideoPreview
 
 enum AppPages: Identifiable, Hashable {
     var id: Self { self }
 
     case camera
     case imagePreview(UIImage)
+    case videoPreview(URL)
 
     static func == (lhs: AppPages, rhs: AppPages) -> Bool {
         switch (lhs, rhs) {
         case (.camera, .camera):
                 return true
         case (.imagePreview, .imagePreview):
+            return true
+        case (.videoPreview, .videoPreview):
             return true
         default:
             return false
@@ -44,11 +48,19 @@ class HomeCoordinator: ObservableObject {
                 switch event {
                 case .finishCapturingPhoto(let image):
                     self.push(page: .imagePreview(image))
+                case .finishCapturingVideo(let url):
+                    self.push(page: .videoPreview(url))
                 default: break
                 }
             }
         case .imagePreview(let image):
             ImagePreviewView(previewImage: .init(uiImage: image)) { event in
+                switch event {
+                default: break
+                }
+            }
+        case .videoPreview(let url):
+            VideoPreviewView(url: url) { event in
                 switch event {
                 default: break
                 }

@@ -34,9 +34,9 @@ public extension CameraFeedView {
                 isFirstLaunch = false
 
             case .tappedOnSnapButton(let mode):
+                isLoading = true
                 switch mode {
                 case .photo:
-                    isLoading = true
                     cameraManager.captureImage { image in
                         guard let image else {
                             self.isLoading = false
@@ -48,8 +48,13 @@ public extension CameraFeedView {
                 case .video(let isRecording):
                     self.isRecording = isRecording
                     if isRecording {
-                        cameraManager.startRecording { url in
-                            print(url)
+                        cameraManager.startRecording { url, error in
+                            guard let url else {
+                                self.isLoading = false
+                                return
+                            }
+                            self.isLoading = false
+                            self.onNavigationEvents(.finishCapturingVideo(url))
                         }
                     } else {
                         cameraManager.stopRecording()
