@@ -6,7 +6,7 @@ public struct GenericOptionButton: View {
     let customInset: CGFloat
     var action: () -> Void
 
-    public init(imageName: String, customInset: CGFloat = 10.0, action: @escaping () -> Void) {
+    public init(imageName: String, customInset: CGFloat = 10, action: @escaping () -> Void) {
         self.imageName = imageName
         self.customInset = customInset
         self.action = action

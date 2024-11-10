@@ -10,7 +10,7 @@ public extension ImagePreviewView {
         @ObservedObject var previewImage: PreviewImage
         @Published var currentFilter: ImageFilter = .none
         @Published var showFiltersOptions: Bool = false
-        @Published var filterIntensity: CGFloat = 1.0
+        @Published var filterIntensity: CGFloat = 1
         private let onNavigationEvents: (NavigationEvent) -> Void
 
         init(

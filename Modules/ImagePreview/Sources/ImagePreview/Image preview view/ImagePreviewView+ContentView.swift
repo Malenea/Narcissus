@@ -77,18 +77,18 @@ public extension ImagePreviewView {
                             FilterOptionsButton {
                                 onEvent(.showFiltersOptions)
                             }
-                            .padding(.leading, 24.0)
-                            .padding(.trailing, 16.0)
+                            .padding(.leading, 24)
+                            .padding(.trailing, 16)
                             .padding(.bottom, geometry.safeAreaInsets.bottom)
                             Spacer()
                             ShareLink(item: sharingImage, preview: SharePreview("Narcissus", image: sharingImage), label: {
                                 ShareButton()
                             })
-                            .padding(.leading, 16.0)
-                            .padding(.trailing, 24.0)
+                            .padding(.leading, 16)
+                            .padding(.trailing, 24)
                             .padding(.bottom, geometry.safeAreaInsets.bottom)
                         }
-                        .frame(height: 104.0 + geometry.safeAreaInsets.bottom)
+                        .frame(height: 104 + geometry.safeAreaInsets.bottom)
                         .frame(maxWidth: .infinity)
                         .background(Color.black.opacity(0.6))
                     }

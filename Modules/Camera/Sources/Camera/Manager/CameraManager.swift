@@ -178,7 +178,7 @@ public class CameraManager: ObservableObject {
             try device.lockForConfiguration()
             flashMode = torchIsOn ? .on : .off
             if torchIsOn {
-                try device.setTorchModeOn(level: 1.0)
+                try device.setTorchModeOn(level: 1)
             } else {
                 device.torchMode = .off
             }

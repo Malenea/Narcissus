@@ -3,10 +3,10 @@ import Shared
 
 struct CameraOptionsButton: View {
 
-    var action: () -> Void
+    let action: () -> Void
 
     var body: some View {
-        GenericOptionButton(imageName: "option", customInset: 14.0, action: action)
+        GenericOptionButton(imageName: "option", customInset: 14, action: action)
     }
 
 }

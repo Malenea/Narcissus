@@ -1,7 +1,6 @@
 import Foundation
 import Shared
 
-// MARK: - Filters type for custom filters
 public enum FilterType : String {
     case Mono = "CIPhotoEffectMono"
     case MonoChrome = "CIColorMonochrome"
@@ -16,7 +15,6 @@ public enum FilterType : String {
     case NoiseReduction = "CINoiseReduction"
 }
 
-// MARK: - Filters enum for filters selector
 public enum ImageFilter: String {
     case none
     case sepia

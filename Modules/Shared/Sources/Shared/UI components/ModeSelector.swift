@@ -77,7 +77,6 @@ public struct ModeSelector: View {
         ForEach(modes, id: \.id) { mode in
             VStack {
                 Button {
-                    /// This is to prevent changing mode while recording is active
                     guard currentMode != mode && !isDisabled else {
                         return
                     }

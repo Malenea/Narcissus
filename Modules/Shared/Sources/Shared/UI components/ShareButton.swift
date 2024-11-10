@@ -1,9 +1,10 @@
 import SwiftUI
-import Shared
 
-struct ShareButton: View {
+public struct ShareButton: View {
 
-    var body: some View {
+    public init() {}
+
+    public var body: some View {
         GenericOptionButton(imageName: "square.and.arrow.up", action: {})
             .disabled(true)
     }

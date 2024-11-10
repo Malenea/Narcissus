@@ -34,9 +34,9 @@ public extension CameraFeedView {
                 isFirstLaunch = false
 
             case .tappedOnSnapButton(let mode):
-                isLoading = true
                 switch mode {
                 case .photo:
+                    isLoading = true
                     cameraManager.captureImage { image in
                         guard let image else {
                             self.isLoading = false
@@ -58,9 +58,13 @@ public extension CameraFeedView {
                         }
                     } else {
                         cameraManager.stopRecording()
+                        isLoading = true
                     }
                 }
 
+            case .switchFlash:
+                isFlashOn.toggle()
+                cameraManager.toggleTorch(torchIsOn: isFlashOn)
             case .showModeOptions:
                 withAnimation {
                     showModeOptions.toggle()

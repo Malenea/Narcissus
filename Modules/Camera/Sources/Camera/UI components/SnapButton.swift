@@ -40,8 +40,8 @@ public struct SnapButton: View {
                 action?(currentMode.isPhoto ? .photo : .video(isRecording ? false : true))
             }, label: {
                 ZStack {
-                    photoButton.opacity(currentMode.isPhoto ? 1.0 : .zero).animation(.spring(), value: currentMode.isPhoto)
-                    videoButton.opacity(currentMode.isPhoto ? .zero : 1.0).animation(.spring, value: currentMode.isPhoto)
+                    photoButton.opacity(currentMode.isPhoto ? 1 : .zero).animation(.spring(), value: currentMode.isPhoto)
+                    videoButton.opacity(currentMode.isPhoto ? .zero : 1).animation(.spring, value: currentMode.isPhoto)
                 }
             })
             .disabled(isLoading)

@@ -1,5 +1,6 @@
 import SwiftUI
 import AVKit
+import Shared
 
 public extension VideoPreviewView {
 
@@ -8,6 +9,11 @@ public extension VideoPreviewView {
         let player: Binding<AVPlayer>
         let url: URL
         let onEvent: (Event) -> Void
+
+        private var thumbnailImage: Image {
+            guard let uiImageThumbnail = url.getThumbnailImageFromVideoURL() else { return Image(systemName: "questionmark") }
+            return Image(uiImage: uiImageThumbnail)
+        }
 
         init(
             player: Binding<AVPlayer>,
@@ -70,13 +76,13 @@ public extension VideoPreviewView {
 //                            .padding(.leading, 24.0)
 //                            .padding(.trailing, 16.0)
 //                            .padding(.bottom, geometry.safeAreaInsets.bottom)
-//                            Spacer()
-//                            ShareLink(item: sharingImage, preview: SharePreview("Narcissus", image: sharingImage), label: {
-//                                ShareButton()
-//                            })
-//                            .padding(.leading, 16.0)
-//                            .padding(.trailing, 24.0)
-//                            .padding(.bottom, geometry.safeAreaInsets.bottom)
+                            Spacer()
+                            ShareLink(item: url, preview: SharePreview("Narcissus", image: thumbnailImage), label: {
+                                ShareButton()
+                            })
+                            .padding(.leading, 16.0)
+                            .padding(.trailing, 24.0)
+                            .padding(.bottom, geometry.safeAreaInsets.bottom)
                         }
                         .frame(height: 104.0 + geometry.safeAreaInsets.bottom)
                         .frame(maxWidth: .infinity)

@@ -2,10 +2,8 @@ import UIKit
 import CoreImage
 import CoreImage.CIFilterBuiltins
 
-// MARK: - Extensions to UIImage to apply filters directly
 public extension UIImage {
 
-    // MARK: - Builtin filters
     func toSepia(intensity: CGFloat) -> UIImage {
         guard let ciImage = CIImage(image: self) else { return self }
 
@@ -15,7 +13,6 @@ public extension UIImage {
         return applyFilter(filter, inputImage: self)
     }
 
-    // MARK: - Custom filters
     var toSketch: UIImage {
         self
             .addFilter(filterType: .Posterize)
@@ -37,7 +34,7 @@ public extension UIImage {
             }
             if filterType == .MonoChrome {
                 filter?.setValue(CIColor(red: 0.8, green: 0.8, blue: 0.8), forKey: "inputColor")
-                filter?.setValue(1.0, forKey: "inputIntensity")
+                filter?.setValue(1, forKey: "inputIntensity")
             }
             if filterType == .NoiseReduction {
                 filter?.setValue(2, forKey: "inputSharpness")

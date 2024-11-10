@@ -9,6 +9,7 @@ public extension CameraFeedView {
         let currentMode: Binding<CameraMode>
         let isLoading: Bool
         let isRecording: Bool
+        let isFlashOn: Bool
         let session: AVCaptureSession
         let showSettingAlert: Binding<Bool>
         let showModeOptions: Bool
@@ -21,6 +22,7 @@ public extension CameraFeedView {
             isLoading: Bool,
             currentMode: Binding<CameraMode>,
             isRecording: Bool,
+            isFlashOn: Bool,
             showSettingAlert: Binding<Bool>,
             showModeOptions: Bool,
             onEvent: @escaping (Event) -> Void
@@ -29,6 +31,7 @@ public extension CameraFeedView {
             self.currentMode = currentMode
             self.isLoading = isLoading
             self.isRecording = isRecording
+            self.isFlashOn = isFlashOn
             self.showSettingAlert = showSettingAlert
             self.showModeOptions = showModeOptions
             self.onEvent = onEvent
@@ -56,10 +59,13 @@ public extension CameraFeedView {
             GeometryReader { geometry in
                 ZStack {
                     Color.black.edgesIgnoringSafeArea(.all)
-
                     cameraFeedPreview
                         .ignoresSafeArea(.all)
                     VStack(spacing: .zero) {
+                        FlashSwitchButton(isOn: isFlashOn) {
+                            onEvent(.switchFlash)
+                        }
+                        .padding(16)
                         Spacer()
                         if showModeOptions {
                             ModeSelector(currentMode: currentMode.wrappedValue.toModeSelectorItem, modes: CameraMode.allModeSelectorCases, isDisabled: isRecording) {
@@ -72,8 +78,8 @@ public extension CameraFeedView {
                             CameraOptionsButton {
                                 onEvent(.showModeOptions)
                             }
-                            .padding(.leading, 24.0)
-                            .padding(.trailing, 16.0)
+                            .padding(.leading, 24)
+                            .padding(.trailing, 16)
                             Spacer()
                             SnapButton(
                                 currentMode: currentMode,
@@ -87,10 +93,10 @@ public extension CameraFeedView {
                             CameraSwitchButton {
                                 onEvent(.switchCamera)
                             }
-                            .padding(.leading, 16.0)
-                            .padding(.trailing, 24.0)
+                            .padding(.leading, 16)
+                            .padding(.trailing, 24)
                         }
-                        .frame(height: 104.0)
+                        .frame(height: 104)
                         .frame(maxWidth: .infinity)
                         .background(Color.black.opacity(0.6))
                     }

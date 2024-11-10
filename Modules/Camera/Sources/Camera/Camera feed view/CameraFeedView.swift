@@ -8,6 +8,7 @@ public struct CameraFeedView: View {
 
         case tappedOnSnapButton(CameraMode)
 
+        case switchFlash
         case showModeOptions
         case switchModeOption(CameraMode)
         case switchCamera
@@ -39,6 +40,7 @@ public struct CameraFeedView: View {
             isLoading: viewModel.isLoading,
             currentMode: $viewModel.currentMode,
             isRecording: viewModel.isRecording,
+            isFlashOn: viewModel.isFlashOn,
             showSettingAlert: $viewModel.showSettingAlert,
             showModeOptions: viewModel.showModeOptions,
             onEvent: { currentEvent = $0 }
