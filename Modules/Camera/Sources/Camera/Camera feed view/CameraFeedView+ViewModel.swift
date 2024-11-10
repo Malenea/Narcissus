@@ -1,5 +1,6 @@
 import SwiftUI
 import AVFoundation
+import Shared
 
 public extension CameraFeedView {
 
@@ -8,12 +9,14 @@ public extension CameraFeedView {
 
         @ObservedObject var cameraManager: CameraManager = .init()
         @Published var currentMode: CameraMode = .photo
+        @Published var currentTimer: TimerMode = .instant
         @Published var isLoading: Bool = false
         @Published var isRecording: Bool = false
         @Published var isFlashOn: Bool = false
         @Published var showAlertError: Bool = false
         @Published var showSettingAlert: Bool = false
         @Published var showModeOptions: Bool = false
+        @Published var showTimerOptions: Bool = false
         @Published var isPermissionGranted: Bool = false
 
         var isFirstLaunch: Bool = true
@@ -47,7 +50,8 @@ public extension CameraFeedView {
                     }
                 case .video(let isRecording):
                     self.isRecording = isRecording
-                    if isRecording {
+                    if !isRecording {
+                        self.isRecording = true
                         cameraManager.startRecording { url, error in
                             guard let url else {
                                 self.isLoading = false
@@ -57,6 +61,7 @@ public extension CameraFeedView {
                             self.onNavigationEvents(.finishCapturingVideo(url))
                         }
                     } else {
+                        self.isRecording = false
                         cameraManager.stopRecording()
                         isLoading = true
                     }
@@ -72,6 +77,12 @@ public extension CameraFeedView {
             case .switchModeOption(let mode):
                 currentMode = mode
                 cameraManager.reconfigureCaptureSession(mode: currentMode)
+            case .showTimerOptions:
+                withAnimation {
+                    showTimerOptions.toggle()
+                }
+            case .changeTimerOption(let timer):
+                currentTimer = timer
             case .switchCamera:
                 switchCamera()
 

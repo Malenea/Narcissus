@@ -55,17 +55,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "249A4640-7B34-41DB-A632-CCA97FF152C7"
+            uuid = "C30332A3-0E46-4C8B-ADC5-CE3705E072F2"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Modules/Camera/Sources/Camera/Camera feed view/CameraFeedView+ViewModel.swift"
+            filePath = "Modules/Camera/Sources/Camera/Camera feed view/CameraFeedView+ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "handle(event:)"
-            landmarkType = "7">
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "contentView"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

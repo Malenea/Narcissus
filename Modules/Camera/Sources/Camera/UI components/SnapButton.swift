@@ -37,10 +37,10 @@ public struct SnapButton: View {
     private var innerButton: some View {
         ZStack {
             Button(action: {
-                action?(currentMode.isPhoto ? .photo : .video(isRecording ? false : true))
+                action?(currentMode.isPhoto ? .photo : .video(isRecording))
             }, label: {
                 ZStack {
-                    photoButton.opacity(currentMode.isPhoto ? 1 : .zero).animation(.spring(), value: currentMode.isPhoto)
+                    photoButton.opacity(currentMode.isPhoto ? 1 : .zero).animation(.spring, value: currentMode.isPhoto)
                     videoButton.opacity(currentMode.isPhoto ? .zero : 1).animation(.spring, value: currentMode.isPhoto)
                 }
             })

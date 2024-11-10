@@ -1,4 +1,5 @@
 import SwiftUI
+import Shared
 
 public struct CameraFeedView: View {
 
@@ -11,6 +12,8 @@ public struct CameraFeedView: View {
         case switchFlash
         case showModeOptions
         case switchModeOption(CameraMode)
+        case showTimerOptions
+        case changeTimerOption(TimerMode)
         case switchCamera
 
         case openSettings
@@ -35,14 +38,20 @@ public struct CameraFeedView: View {
     }
 
     public var body: some View {
+        let showOptions = ViewShowOptions(
+            showSettingAlert: $viewModel.showSettingAlert,
+            showTimerOptions: viewModel.showTimerOptions,
+            showModeOptions: viewModel.showModeOptions
+        )
+
         ContentView(
             session: viewModel.cameraManager.session,
             isLoading: viewModel.isLoading,
             currentMode: $viewModel.currentMode,
+            currentTimer: $viewModel.currentTimer,
             isRecording: viewModel.isRecording,
             isFlashOn: viewModel.isFlashOn,
-            showSettingAlert: $viewModel.showSettingAlert,
-            showModeOptions: viewModel.showModeOptions,
+            showOptions: showOptions,
             onEvent: { currentEvent = $0 }
         )
         .task(id: currentEvent) {
