@@ -22,3 +22,24 @@ class CameraDelegate: NSObject, AVCapturePhotoCaptureDelegate {
     }
 
 }
+
+class VideoDelegate: NSObject, AVCaptureFileOutputRecordingDelegate {
+
+    private let completion: (URL?, CameraManager.ManagerError?) -> Void
+
+    init(completion: @escaping (URL?, CameraManager.ManagerError?) -> Void) {
+        self.completion = completion
+    }
+
+    func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
+    }
+
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: (any Error)?) {
+        if let error {
+            completion(nil, CameraManager.ManagerError.capturingError(error))
+            return
+        }
+        completion(outputFileURL, nil)
+    }
+
+}

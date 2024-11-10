@@ -48,7 +48,9 @@ public class CameraManager: ObservableObject {
     }
 
     @Published var capturedImage: UIImage? = nil
+    @Published var capturedVideoURL: URL? = nil
     private var cameraDelegate: CameraDelegate?
+    private var videoDelegate: VideoDelegate?
 
     @Published var status: Status = .unconfigured
     @Published var currentCamera: AVCaptureDevice.Position = .back
@@ -57,17 +59,44 @@ public class CameraManager: ObservableObject {
 
     let session = AVCaptureSession()
     let photoOutput = AVCapturePhotoOutput()
+    let videoOutput = AVCaptureMovieFileOutput()
     var videoDeviceInput: AVCaptureDeviceInput?
     private let sessionQueue = DispatchQueue(label: "com.demo.sessionQueue")
 
-    func configureCaptureSession() {
+    func reconfigureCaptureSession(mode: CameraMode) {
+        sessionQueue.async { [weak self] in
+            self?.session.beginConfiguration()
+            if mode == .photo {
+                self?.session.sessionPreset = .photo
+                if let videoOutput = self?.videoOutput {
+                    self?.session.removeOutput(videoOutput)
+                }
+            } else {
+                self?.session.sessionPreset = .high
+                if let videoOutput = self?.videoOutput {
+                    self?.session.addOutput(videoOutput)
+                }
+            }
+            self?.session.commitConfiguration()
+        }
+    }
+
+    func configureCaptureSession(mode: CameraMode) {
         sessionQueue.async { [weak self] in
             guard self?.status == .unconfigured else { return }
 
             self?.session.beginConfiguration()
-            self?.session.sessionPreset = .photo
+            if mode == .photo {
+                self?.session.sessionPreset = .photo
+            } else {
+                self?.session.sessionPreset = .high
+            }
             self?.setupVideoInput()
-            self?.setupPhotoOutput()
+            if mode == .photo {
+                self?.setupPhotoOutput()
+            } else {
+                self?.setupVideoOutput()
+            }
             self?.session.commitConfiguration()
             self?.startCapturing()
         }
@@ -105,6 +134,17 @@ public class CameraManager: ObservableObject {
             photoOutput.maxPhotoDimensions = .init(width: 4032, height: 3024)
             photoOutput.maxPhotoQualityPrioritization = .quality
             status = .configured
+        } else {
+            managerError = .addOutput
+            status = .failed
+            session.commitConfiguration()
+            return
+        }
+    }
+
+    private func setupVideoOutput() {
+        if session.canAddOutput(videoOutput) {
+            session.addOutput(videoOutput)
         } else {
             managerError = .addOutput
             status = .failed
@@ -181,6 +221,29 @@ public class CameraManager: ObservableObject {
                 self.photoOutput.capturePhoto(with: photoSettings, delegate: cameraDelegate)
             }
         }
+    }
+
+    func startRecording(completion: @escaping (URL?) -> Void) {
+        guard !videoOutput.isRecording, let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("video.mp4") else { return }
+        videoDelegate = VideoDelegate { [weak self] url, error in
+            if let error {
+                self?.managerError = error
+            }
+            self?.capturedVideoURL = url
+            completion(url)
+        }
+        if !videoOutput.isRecording {
+            if FileManager.default.fileExists(atPath: url.path) {
+                try? FileManager.default.removeItem(at: url)
+            }
+            guard let videoDelegate else { return }
+            videoOutput.startRecording(to: url, recordingDelegate: videoDelegate)
+        }
+    }
+
+    func stopRecording() {
+        guard videoOutput.isRecording else { return }
+        videoOutput.stopRecording()
     }
 
 }

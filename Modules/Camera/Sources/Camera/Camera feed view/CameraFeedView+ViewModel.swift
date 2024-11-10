@@ -47,6 +47,13 @@ public extension CameraFeedView {
                     }
                 case .video(let isRecording):
                     self.isRecording = isRecording
+                    if isRecording {
+                        cameraManager.startRecording { url in
+                            print(url)
+                        }
+                    } else {
+                        cameraManager.stopRecording()
+                    }
                 }
 
             case .showModeOptions:
@@ -55,6 +62,7 @@ public extension CameraFeedView {
                 }
             case .switchModeOption(let mode):
                 currentMode = mode
+                cameraManager.reconfigureCaptureSession(mode: currentMode)
             case .switchCamera:
                 switchCamera()
 
@@ -70,7 +78,7 @@ public extension CameraFeedView {
         }
 
         private func checkForDevicePermission() {
-            let videoStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+            let videoStatus = AVCaptureDevice.authorizationStatus(for: .video)
             switch videoStatus {
             case .denied:
                 isPermissionGranted = false
@@ -86,7 +94,7 @@ public extension CameraFeedView {
         }
 
         private func configureCamera() {
-            cameraManager.configureCaptureSession()
+            cameraManager.configureCaptureSession(mode: .photo)
         }
 
         private func switchCamera() {
