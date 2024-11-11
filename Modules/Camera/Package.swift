@@ -15,6 +15,9 @@ let package = Package(
         ),
     ],
     dependencies: [
+        // Third-party libs
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.10.0"),
+
         // Local packages
         .package(path: "../Shared"),
     ],
@@ -29,7 +32,10 @@ let package = Package(
         .testTarget(
             name: "CameraTests",
             dependencies: [
-                "Camera"
+                "Camera",
+
+                // Third-party libs
+                .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
             ]
         ),
     ]

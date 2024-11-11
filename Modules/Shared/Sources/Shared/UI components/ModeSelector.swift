@@ -44,7 +44,7 @@ public struct ModeSelector: View {
             innerContent
                 .padding(12)
                 .background {
-                    Color(.systemBackground)
+                    Color(.black)
                         .opacity(0.6)
                         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
                         .overlay(RoundedRectangle(cornerRadius: 18)

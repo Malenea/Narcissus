@@ -108,7 +108,7 @@ public extension ImagePreviewView {
             }
             .padding(8)
             .background {
-                Color(.systemBackground)
+                Color(.black)
                     .opacity(0.6)
                     .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
                     .overlay(
