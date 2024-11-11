@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		FA4770552CE001AE00921891 /* ImagePreview in Frameworks */ = {isa = PBXBuildFile; productRef = FA4770542CE001AE00921891 /* ImagePreview */; };
 		FA47705C2CE13E5400921891 /* VideoPreview in Frameworks */ = {isa = PBXBuildFile; productRef = FA47705B2CE13E5400921891 /* VideoPreview */; };
+		FA47705E2CE2185B00921891 /* CameraMocks in Frameworks */ = {isa = PBXBuildFile; productRef = FA47705D2CE2185B00921891 /* CameraMocks */; };
+		FA4770602CE2185E00921891 /* CameraProtocols in Frameworks */ = {isa = PBXBuildFile; productRef = FA47705F2CE2185E00921891 /* CameraProtocols */; };
 		FAA3820C2CDE39EA009669D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAA3820B2CDE39EA009669D8 /* Assets.xcassets */; };
 		FAA3820F2CDE39EA009669D8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAA3820E2CDE39EA009669D8 /* Preview Assets.xcassets */; };
 		FAA382192CDE39EA009669D8 /* NarcissusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA382182CDE39EA009669D8 /* NarcissusTests.swift */; };
@@ -61,7 +63,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAA382382CDE5F8F009669D8 /* Camera in Frameworks */,
+				FA47705E2CE2185B00921891 /* CameraMocks in Frameworks */,
 				FA47705C2CE13E5400921891 /* VideoPreview in Frameworks */,
+				FA4770602CE2185E00921891 /* CameraProtocols in Frameworks */,
 				FA4770552CE001AE00921891 /* ImagePreview in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -189,6 +193,8 @@
 				FAA382372CDE5F8F009669D8 /* Camera */,
 				FA4770542CE001AE00921891 /* ImagePreview */,
 				FA47705B2CE13E5400921891 /* VideoPreview */,
+				FA47705D2CE2185B00921891 /* CameraMocks */,
+				FA47705F2CE2185E00921891 /* CameraProtocols */,
 			);
 			productName = Narcissus;
 			productReference = FAA382042CDE39E9009669D8 /* Narcissus.app */;
@@ -660,6 +666,14 @@
 		FA47705B2CE13E5400921891 /* VideoPreview */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VideoPreview;
+		};
+		FA47705D2CE2185B00921891 /* CameraMocks */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CameraMocks;
+		};
+		FA47705F2CE2185E00921891 /* CameraProtocols */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CameraProtocols;
 		};
 		FAA382372CDE5F8F009669D8 /* Camera */ = {
 			isa = XCSwiftPackageProductDependency;

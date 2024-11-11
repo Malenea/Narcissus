@@ -1,13 +1,14 @@
 import SwiftUI
 import AVFoundation
 import Shared
+import CameraProtocols
 
 public extension CameraFeedView {
 
     @MainActor
-    class ViewModel: ObservableObject {
+    class ViewModel<T: CameraManagerProtocol>: ObservableObject {
 
-        @ObservedObject var cameraManager: CameraManager = .init()
+        @ObservedObject var cameraManager: T
         @Published var currentMode: CameraMode = .photo
         @Published var currentTimer: TimerMode = .instant
         @Published var isLoading: Bool = false
@@ -24,8 +25,10 @@ public extension CameraFeedView {
         private let onNavigationEvents: (NavigationEvent) -> Void
 
         init(
+            cameraManager: T,
             onNavigationEvents: @escaping (NavigationEvent) -> Void
         ) {
+            self.cameraManager = cameraManager
             self.onNavigationEvents = onNavigationEvents
         }
 

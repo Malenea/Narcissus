@@ -28,13 +28,16 @@ public struct CameraFeedView: View {
 
     public typealias NavigationEvent = CameraFeedView.Event
 
-    @StateObject private var viewModel: ViewModel
+    @StateObject private var viewModel: ViewModel<CameraManager>
     @State private var currentEvent: Event? = .didAppear
 
     public init(
         onNavigationEvent: @escaping (NavigationEvent) -> Void
     ) {
-        self._viewModel = .init(wrappedValue: ViewModel(onNavigationEvents: onNavigationEvent))
+        self._viewModel = .init(wrappedValue: ViewModel(
+            cameraManager: CameraManager(),
+            onNavigationEvents: onNavigationEvent
+        ))
     }
 
     public var body: some View {

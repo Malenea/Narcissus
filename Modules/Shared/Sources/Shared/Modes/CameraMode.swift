@@ -1,5 +1,4 @@
 import Foundation
-import Shared
 
 public enum CameraMode: Identifiable, Equatable, CaseIterable {
     case photo

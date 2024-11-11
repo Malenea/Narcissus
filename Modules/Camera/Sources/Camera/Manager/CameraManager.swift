@@ -1,7 +1,9 @@
 import UIKit
 import AVFoundation
+import Shared
+import CameraProtocols
 
-public class CameraManager: ObservableObject {
+public class CameraManager: CameraManagerProtocol {
 
     public enum Status {
         case configured
@@ -57,13 +59,13 @@ public class CameraManager: ObservableObject {
     @Published var flashMode: AVCaptureDevice.FlashMode = .off
     @Published var managerError: ManagerError?
 
-    let session = AVCaptureSession()
+    public var session = AVCaptureSession()
     let photoOutput = AVCapturePhotoOutput()
     let videoOutput = AVCaptureMovieFileOutput()
     var videoDeviceInput: AVCaptureDeviceInput?
     private let sessionQueue = DispatchQueue(label: "com.demo.sessionQueue")
 
-    func reconfigureCaptureSession(mode: CameraMode) {
+    public func reconfigureCaptureSession(mode: CameraMode) {
         sessionQueue.async { [weak self] in
             self?.session.beginConfiguration()
             if mode == .photo {
@@ -81,7 +83,7 @@ public class CameraManager: ObservableObject {
         }
     }
 
-    func configureCaptureSession(mode: CameraMode) {
+    public func configureCaptureSession(mode: CameraMode) {
         sessionQueue.async { [weak self] in
             guard self?.status == .unconfigured else { return }
 
@@ -168,7 +170,7 @@ public class CameraManager: ObservableObject {
         }
     }
 
-    func toggleTorch(torchIsOn: Bool) {
+    public func toggleTorch(torchIsOn: Bool) {
         guard let device = AVCaptureDevice.default(for: .video) else { return }
         guard device.hasTorch else {
             managerError = .torchUnavailable
@@ -188,14 +190,14 @@ public class CameraManager: ObservableObject {
         }
     }
 
-    func switchCamera() {
+    public func switchCamera() {
         currentCamera = currentCamera == .back ? .front : .back
         guard let videoDeviceInput else { return }
         session.removeInput(videoDeviceInput)
         setupVideoInput()
     }
 
-    func captureImage(completion: @escaping (UIImage?) -> Void) {
+    public func captureImage(completion: @escaping (UIImage?) -> Void) {
         sessionQueue.async { [weak self] in
             guard let self else { return }
             var photoSettings = AVCapturePhotoSettings()
@@ -223,7 +225,7 @@ public class CameraManager: ObservableObject {
         }
     }
 
-    func startRecording(completion: @escaping (URL?, Error?) -> Void) {
+    public func startRecording(completion: @escaping (URL?, Error?) -> Void) {
         guard !videoOutput.isRecording, let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("video.mp4") else { return }
         videoDelegate = VideoDelegate { [weak self] url, error in
             if let error {
@@ -242,7 +244,7 @@ public class CameraManager: ObservableObject {
         }
     }
 
-    func stopRecording() {
+    public func stopRecording() {
         guard videoOutput.isRecording else { return }
         videoOutput.stopRecording()
     }
