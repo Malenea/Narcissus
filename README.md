@@ -111,9 +111,12 @@ package. Making it easier to not import them where they're not needed
 
 ## Conclusion
 
-I've tried my best at providing an app that is scalable and innovative architecture and pattern wise while keeping good practices, though not being your full typical design.
-I've decided to go with something as polished as I could and that had some value delivered at the expense of being fully complete. If it was to be a production delivery, I would rather deliver value to our
-users and iterate over it rather than delivering an incomplete app or not deliver at all.
+I've tried my best to provide an app that is scalable and innovative, architecture and pattern wise, while keeping good practices.
+I've decided to go with something as polished as I could and that had some value delivered at the expense of being fully complete.
+
+If it was to be a production delivery, I would rather deliver value to our users and iterate over it rather than delivering an incomplete app or not deliver at all.
+Otherwise, if speed was at hand, I would also probably not have gone for a full in-house solution like I did for this test purpose, but would have looked into third-parties framework given they achieve
+the standards we're looking for and are beneficial to us.
 
 The app in general was made so you could assess better my coding skills and top processes regarding architecture and scalability capabilities.
 
