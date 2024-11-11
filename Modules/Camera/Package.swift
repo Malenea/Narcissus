@@ -13,18 +13,6 @@ let package = Package(
                 "Camera"
             ]
         ),
-        .library(
-            name: "CameraMocks",
-            targets: [
-                "CameraMocks"
-            ]
-        ),
-        .library(
-            name: "CameraProtocols",
-            targets: [
-                "CameraProtocols"
-            ]
-        ),
     ],
     dependencies: [
         // Local packages
@@ -38,26 +26,10 @@ let package = Package(
                 .product(name: "Shared", package: "Shared"),
             ]
         ),
-        .target(
-            name: "CameraMocks",
-            dependencies: [
-                // Local packages
-                .product(name: "Shared", package: "Shared"),
-            ]
-        ),
-        .target(
-            name: "CameraProtocols",
-            dependencies: [
-                // Local packages
-                .product(name: "Shared", package: "Shared"),
-            ]
-        ),
         .testTarget(
             name: "CameraTests",
             dependencies: [
-                "Camera",
-                "CameraMocks",
-                "CameraProtocols"
+                "Camera"
             ]
         ),
     ]

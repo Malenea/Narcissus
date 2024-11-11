@@ -1,7 +1,6 @@
 import SwiftUI
 import AVFoundation
 import Shared
-import CameraProtocols
 
 public extension CameraFeedView {
 
@@ -85,6 +84,7 @@ public extension CameraFeedView {
                     showTimerOptions.toggle()
                 }
             case .changeTimerOption(let timer):
+                print("BOUNGA: \(timer)")
                 currentTimer = timer
             case .switchCamera:
                 switchCamera()

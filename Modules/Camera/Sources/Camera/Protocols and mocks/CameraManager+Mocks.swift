@@ -1,7 +1,6 @@
 import UIKit
 import AVKit
 import Shared
-import CameraProtocols
 
 public class CameraManagerMock: CameraManagerProtocol {
 

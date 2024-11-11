@@ -1,7 +1,6 @@
 import UIKit
 import AVFoundation
 import Shared
-import CameraProtocols
 
 public class CameraManager: CameraManagerProtocol {
 
