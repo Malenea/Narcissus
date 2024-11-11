@@ -28,4 +28,6 @@ public class CameraManagerMock: CameraManagerProtocol {
     public func captureImage(completion: @escaping (UIImage?) -> Void) {
     }
 
+    public init() {}
+
 }

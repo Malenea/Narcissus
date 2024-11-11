@@ -22,7 +22,7 @@ public extension CameraFeedView {
 
         var isFirstLaunch: Bool = true
         var session: AVCaptureSession = .init()
-        private let onNavigationEvents: (NavigationEvent) -> Void
+        let onNavigationEvents: (NavigationEvent) -> Void
 
         init(
             cameraManager: T,
